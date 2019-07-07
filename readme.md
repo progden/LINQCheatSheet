@@ -155,3 +155,18 @@
 **Where**
 
 **Zip**
+
+有點將資料合併起來的意思，也就是zip字面上的拉鍊的感覺
+
+給兩條 IEnumerable<T> 跟一個合併的方法 (first, second) => result
+
+```csharp
+// 這個比較有兩個list合併的感覺
+var numMapping = Enumerable.Zip(new List<int>{1, 2, 3},								new List<string> { "one", "two", "three", "four"}, //用四個值								(intNum, strNum) => $"{intNum}: {strNum}");Console.WriteLine(numMapping);// 這個 zip 第二個 listvar numMapping2 = Enumerable.Range(1, 5) // 用五個值							.Zip(new List<string> { "one", "two", "three" },								(intNum, strNum) => $"{intNum}: {strNum}");Console.WriteLine(numMapping2);
+
+// 最後zip起來的長度會是以短的為主
+Assert.AreEquals(3, numMapping.Count());
+Assert.AreEquals(3, numMapping2.Count());
+
+
+```
